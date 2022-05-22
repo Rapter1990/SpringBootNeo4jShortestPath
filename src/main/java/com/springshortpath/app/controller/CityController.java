@@ -46,12 +46,12 @@ public class CityController {
         return new ResponseEntity<>(savedCity, HttpStatus.CREATED);
     }
 
-    @PutMapping(consumes = "application/json")
-    public ResponseEntity<City> updateCity(@RequestBody CityDTO cityDTO) {
+    @PutMapping("/{cityId}")
+    public ResponseEntity<City> updateCity(@PathVariable(value = "cityId") Long cityId, @RequestBody CityDTO cityDTO) {
         LOGGER.info("CityController | updateCity is started");
         LOGGER.info("CityController | updateCity | update city name : " + cityDTO.getName());
-        City city = cityService.getByCityName(cityDTO.getName());
-        City updatedCity = cityService.updateCity(city.getId(),city);
+        City city = new City(cityDTO.getName());
+        City updatedCity = cityService.updateCity(cityId,city);
         return new ResponseEntity<>(updatedCity, HttpStatus.OK);
     }
 
