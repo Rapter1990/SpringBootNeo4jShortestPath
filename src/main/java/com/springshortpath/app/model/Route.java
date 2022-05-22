@@ -20,6 +20,8 @@ public class Route {
     @GeneratedValue
     private Long id;
 
+    private String from;
+
     private String destination;
 
     private String departureTime;
@@ -27,6 +29,12 @@ public class Route {
     private String arriveTime;
 
     private Long duration;
+
+    public Route(String departureTime, String arriveTime) {
+        this.departureTime = departureTime;
+        this.arriveTime = arriveTime;
+        this.duration = calculateDuration();
+    }
 
     private long calculateDuration() {
 
