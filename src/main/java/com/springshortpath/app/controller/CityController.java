@@ -61,5 +61,6 @@ public class CityController {
         LOGGER.info("CityController | deleteCity | cityId : " + cityId);
         cityService.deleteCity(cityId);
         return new ResponseEntity<>("City is deleted.", HttpStatus.OK);
+
     }
 }
