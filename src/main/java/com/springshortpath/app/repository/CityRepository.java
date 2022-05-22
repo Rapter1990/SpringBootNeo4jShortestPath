@@ -24,5 +24,5 @@ public interface CityRepository extends Neo4jRepository<City,Long> {
     City updateCity(Long cityId, String cityName);
 
     @Query("MATCH (city:City {id: $cityId}) DELETE city")
-    void deleteUser(Long cityId);
+    void deleteCity(Long cityId);
 }

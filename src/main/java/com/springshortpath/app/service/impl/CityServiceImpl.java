@@ -41,6 +41,6 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public void deleteCity(Long cityId) {
-        cityRepository.deleteUser(cityId);
+        cityRepository.deleteCity(cityId);
     }
 }
