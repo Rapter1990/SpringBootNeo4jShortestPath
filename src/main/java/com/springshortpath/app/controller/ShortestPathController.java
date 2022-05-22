@@ -19,6 +19,13 @@ public class ShortestPathController {
         this.shortestPathService = shortestPathService;
     }
 
+    /*
+    {
+      "arrivalCity": "A",
+      "departureCity": "B",
+      "totalConnections": 1
+    }
+     */
     @GetMapping("/shortest-path")
     public Mono<PathShortestConnectionResponse> getShortestPath(@RequestBody PathRequest pathRequest) {
 
@@ -27,6 +34,13 @@ public class ShortestPathController {
                 .switchIfEmpty(Mono.error(new IllegalArgumentException("Error")));
     }
 
+    /*
+    {
+      "arrivalCity": "A",
+      "departureCity": "B",
+      "totalHours": 5
+    }
+     */
     @GetMapping("/shortest-path-in-time")
     public Mono<PathShortestTimeResponse>  getShortestPathInTime(@RequestBody PathRequest pathRequest) {
 

@@ -30,6 +30,23 @@ public class CityController {
         return cityService.getById(cityId);
     }
 
+    /*
+    [
+        {
+            "id": 0,
+            "name": "A",
+            "routes": [
+                {
+                    "from": "A",
+                    "destiny": "B",
+                    "departureTime": "10:00",
+                    "arrivalTime": "11:00"
+                }
+            ]
+        },
+        ...
+    ]
+     */
     @GetMapping("/cities")
     public ResponseEntity<List<City>> getAllCities(){
         LOGGER.info("CityController | getAllCities is started");
