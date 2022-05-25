@@ -29,28 +29,4 @@ public class Route {
     private String arriveTime;
 
     private Long duration;
-
-    public Route(String departureTime, String arriveTime) {
-        this.departureTime = departureTime;
-        this.arriveTime = arriveTime;
-        this.duration = calculateDuration();
-    }
-
-    private long calculateDuration() {
-
-        final LocalDateTime departureDate =
-                LocalDateTime.of(0, 1, 1, getHours(departureTime), getMinutes(departureTime));
-        final LocalDateTime arrivalDate =
-                LocalDateTime.of(0, 1, 1, getHours(arriveTime), getMinutes(arriveTime));
-
-        return Duration.between(departureDate, arrivalDate).toHours();
-    }
-
-    private int getHours(final String time) {
-        return Integer.parseInt(time.split(":")[0]);
-    }
-
-    private int getMinutes(final String time) {
-        return Integer.parseInt(time.split(":")[1]);
-    }
 }

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.neo4j.driver.internal.value.PathValue;
 import org.neo4j.driver.types.Relationship;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -16,6 +17,7 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ShortestPathServiceImpl implements ShortestPathService {
 

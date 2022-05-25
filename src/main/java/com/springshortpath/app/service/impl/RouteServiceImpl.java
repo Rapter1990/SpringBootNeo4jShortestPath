@@ -6,10 +6,12 @@ import com.springshortpath.app.repository.RouteRepository;
 import com.springshortpath.app.service.RouteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class RouteServiceImpl implements RouteService {
 
@@ -28,25 +30,27 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public Route save(Long cityId, RouteDTO routeDTO) {
 
+        String from = routeDTO.getFrom();
         String destination = routeDTO.getDestination();
         String departureTime = routeDTO.getDepartureTime();
         String arriveTime = routeDTO.getArriveTime();
         Long duration = routeDTO.getDuration();
 
-        return routeRepository.saveRoute(cityId,destination,departureTime,
+        return routeRepository.saveRoute(cityId,from,destination,departureTime,
                 arriveTime,duration);
     }
 
     @Override
     public Route update(Long cityId, Long routeId, RouteDTO routeDTO) {
 
+        String from = routeDTO.getFrom();
         String destination = routeDTO.getDestination();
         String departureTime = routeDTO.getDepartureTime();
         String arriveTime = routeDTO.getArriveTime();
         Long duration = routeDTO.getDuration();
 
 
-        return routeRepository.updateRoute(cityId,routeId,destination,departureTime,
+        return routeRepository.updateRoute(cityId,routeId,from, destination,departureTime,
                 arriveTime,duration);
     }
 
