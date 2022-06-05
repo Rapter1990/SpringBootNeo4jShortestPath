@@ -24,8 +24,8 @@ public class CityController {
         this.cityService = cityService;
     }
 
-    @GetMapping("/{cityId}")
-    public City getByCityId(@PathVariable(value = "cityId") UUID cityId) {
+    @GetMapping("/id/{cityId}")
+    public City getCityById(@PathVariable(value = "cityId") UUID cityId) {
         LOGGER.info("CityController | getByCityId is started");
         LOGGER.info("CityController | getByCityId | cityId : " + cityId);
         return cityService.getById(cityId);
@@ -55,8 +55,8 @@ public class CityController {
         return new ResponseEntity<>(cityList, HttpStatus.OK);
     }
 
-    @GetMapping("/{cityName}")
-    public City getByCityName(@PathVariable(value = "cityName") String cityName) {
+    @GetMapping("/name/{cityName}")
+    public City getCityByName(@PathVariable(value = "cityName") String cityName) {
         LOGGER.info("CityController | getByCityName is started");
         LOGGER.info("CityController | getByCityName | cityName : " + cityName);
         return cityService.getByCityName(cityName);
