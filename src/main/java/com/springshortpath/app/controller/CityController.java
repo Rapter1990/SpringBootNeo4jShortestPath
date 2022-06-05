@@ -74,6 +74,7 @@ public class CityController {
     @PutMapping("/{cityId}")
     public ResponseEntity<City> updateCity(@PathVariable(value = "cityId") UUID cityId, @RequestBody CityDTO cityDTO) {
         LOGGER.info("CityController | updateCity is started");
+        LOGGER.info("CityController | updateCity | cityId : " + cityId);
         LOGGER.info("CityController | updateCity | update city name : " + cityDTO.getName());
         City city = new City(cityDTO.getName());
         City updatedCity = cityService.updateCity(cityId,city);
