@@ -7,7 +7,9 @@ import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;
 import reactor.core.publisher.Flux;
 
-public interface ShortestPathRepository extends ReactiveNeo4jRepository<City, Long> {
+import java.util.UUID;
+
+public interface ShortestPathRepository extends ReactiveNeo4jRepository<City, UUID> {
 
     @Query("MATCH p=shortestPath((a:City {name:$from})-[*]->(b:City {name:$to})) RETURN p")
     Flux<PathValue> shortestPath(@Param("from") String from, @Param("to") String to);
