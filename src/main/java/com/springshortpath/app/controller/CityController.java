@@ -52,6 +52,7 @@ public class CityController {
     public ResponseEntity<List<City>> getAllCities(){
         LOGGER.info("CityController | getAllCities is started");
         List<City> cityList = cityService.listAll();
+        LOGGER.info("CityController | getAllCities | cityList : " + cityList.toString());
         return new ResponseEntity<>(cityList, HttpStatus.OK);
     }
 
