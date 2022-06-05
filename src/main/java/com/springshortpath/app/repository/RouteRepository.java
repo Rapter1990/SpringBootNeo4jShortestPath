@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface RouteRepository extends Neo4jRepository<Route,UUID> {
 
-    @Query("MATCH (routes:Route) WHERE routes.id=$cityId RETURN routes")
+    @Query("MATCH (city:City {id: $cityId})<-[:ROUTES]-(route:Route) RETURN route")
     List<Route> listAllByCityId(UUID cityId);
 
     @Query("MATCH (route:Route {id: $routeId}) RETURN route")
