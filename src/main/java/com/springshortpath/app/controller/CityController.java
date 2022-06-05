@@ -78,6 +78,7 @@ public class CityController {
         LOGGER.info("CityController | updateCity | update city name : " + cityDTO.getName());
         City city = new City(cityDTO.getName());
         City updatedCity = cityService.updateCity(cityId,city);
+        LOGGER.info("CityController | updateCity | updatedCity : " + updatedCity.toString());
         return new ResponseEntity<>(updatedCity, HttpStatus.OK);
     }
 
