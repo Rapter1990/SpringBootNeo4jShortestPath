@@ -67,8 +67,8 @@ public class RouteController {
     }
 
     @DeleteMapping("{cityId}/delete-route/{routeId}")
-    public ResponseEntity<String> deleteRoute(@PathVariable(value = "cityId") Long cityId,
-                                             @PathVariable(value = "routeId") Long routeId) {
+    public ResponseEntity<String> deleteRoute(@PathVariable(value = "cityId") UUID cityId,
+                                             @PathVariable(value = "routeId") UUID routeId) {
 
         LOGGER.info("RouteController | deleteRoute is started");
         LOGGER.info("RouteController | deleteRoute | cityId : " + cityId);

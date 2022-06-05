@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface CityRepository extends Neo4jRepository<City,Long> {
 
-    @Query("MATCH (cities:City) RETURN cities")
+    @Query("MATCH (city:City)-[r:ROUTES]->(route:Route) RETURN city, collect(r), collect(route)")
     List<City> listAll();
 
     @Query("MATCH (city:City {id: $cityId}) RETURN city")
