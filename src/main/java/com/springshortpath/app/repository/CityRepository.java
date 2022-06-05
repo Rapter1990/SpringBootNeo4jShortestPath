@@ -7,7 +7,7 @@ import org.springframework.data.neo4j.repository.query.Query;
 import java.util.List;
 import java.util.UUID;
 
-public interface CityRepository extends Neo4jRepository<City,Long> {
+public interface CityRepository extends Neo4jRepository<City,UUID> {
 
     @Query("MATCH (city:City)-[r:ROUTES]->(route:Route) RETURN city, collect(r), collect(route)")
     List<City> listAll();
