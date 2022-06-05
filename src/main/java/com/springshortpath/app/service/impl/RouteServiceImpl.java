@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -18,17 +19,17 @@ public class RouteServiceImpl implements RouteService {
     private final RouteRepository routeRepository;
 
     @Override
-    public List<Route> listAllByCityId(Long cityId) {
+    public List<Route> listAllByCityId(UUID cityId) {
         return routeRepository.listAllByCityId(cityId);
     }
 
     @Override
-    public Route getById(Long routeId) {
+    public Route getById(UUID routeId) {
         return routeRepository.getById(routeId);
     }
 
     @Override
-    public Route save(Long cityId, RouteDTO routeDTO) {
+    public Route save(UUID cityId, RouteDTO routeDTO) {
 
         String from = routeDTO.getFrom();
         String destination = routeDTO.getDestination();
@@ -41,7 +42,7 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public Route update(Long cityId, Long routeId, RouteDTO routeDTO) {
+    public Route update(UUID cityId, UUID routeId, RouteDTO routeDTO) {
 
         String from = routeDTO.getFrom();
         String destination = routeDTO.getDestination();
@@ -55,7 +56,7 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public void delete(Long cityId, Long routeId) {
+    public void delete(UUID cityId, UUID routeId) {
         routeRepository.deleteRoute(cityId,routeId);
     }
 }

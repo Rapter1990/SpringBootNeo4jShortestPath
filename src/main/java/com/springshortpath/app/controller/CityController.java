@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/api/v1/city")
@@ -24,7 +25,7 @@ public class CityController {
     }
 
     @GetMapping("/{cityId}")
-    public City getByCityId(@PathVariable(value = "cityId") Long cityId) {
+    public City getByCityId(@PathVariable(value = "cityId") UUID cityId) {
         LOGGER.info("CityController | getByCityId is started");
         LOGGER.info("CityController | getByCityId | cityId : " + cityId);
         return cityService.getById(cityId);
@@ -54,6 +55,13 @@ public class CityController {
         return new ResponseEntity<>(cityList, HttpStatus.OK);
     }
 
+    @GetMapping("/{cityName}")
+    public City getByCityName(@PathVariable(value = "cityName") String cityName) {
+        LOGGER.info("CityController | getByCityName is started");
+        LOGGER.info("CityController | getByCityName | cityName : " + cityName);
+        return cityService.getByCityName(cityName);
+    }
+
     @PostMapping(consumes = "application/json")
     public ResponseEntity<City> createCity(@RequestBody CityDTO cityDTO) {
         LOGGER.info("CityController | createCity is started");
@@ -64,7 +72,7 @@ public class CityController {
     }
 
     @PutMapping("/{cityId}")
-    public ResponseEntity<City> updateCity(@PathVariable(value = "cityId") Long cityId, @RequestBody CityDTO cityDTO) {
+    public ResponseEntity<City> updateCity(@PathVariable(value = "cityId") UUID cityId, @RequestBody CityDTO cityDTO) {
         LOGGER.info("CityController | updateCity is started");
         LOGGER.info("CityController | updateCity | update city name : " + cityDTO.getName());
         City city = new City(cityDTO.getName());
@@ -73,7 +81,7 @@ public class CityController {
     }
 
     @DeleteMapping("/{cityId}")
-    public ResponseEntity<String> deleteCity(@PathVariable(value = "cityId") Long cityId) {
+    public ResponseEntity<String> deleteCity(@PathVariable(value = "cityId") UUID cityId) {
         LOGGER.info("CityController | deleteCity is started");
         LOGGER.info("CityController | deleteCity | cityId : " + cityId);
         cityService.deleteCity(cityId);

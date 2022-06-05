@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/api/v1/route")
@@ -24,14 +25,14 @@ public class RouteController {
     }
 
     @GetMapping("/{routeId}")
-    public ResponseEntity<Route> getByRouteId(@PathVariable(value = "routeId") Long routeId) {
+    public ResponseEntity<Route> getByRouteId(@PathVariable(value = "routeId") UUID routeId) {
         LOGGER.info("RouteController | getByRouteId is started");
         LOGGER.info("RouteController | getByRouteId | routeId : " + routeId);
         return new ResponseEntity<>(routeService.getById(routeId), HttpStatus.OK);
     }
 
     @GetMapping("/{cityId}/routes")
-    public ResponseEntity<List<Route>> getAllRoutes(@PathVariable(value = "cityId") Long cityId){
+    public ResponseEntity<List<Route>> getAllRoutes(@PathVariable(value = "cityId") UUID cityId){
         LOGGER.info("RouteController | getAllRoutes is started");
         LOGGER.info("RouteController | getAllRoutes | cityId : " + cityId);
         List<Route> routeList = routeService.listAllByCityId(cityId);
@@ -39,7 +40,7 @@ public class RouteController {
     }
 
     @PostMapping(value = "/{cityId}/create-route", consumes = "application/json")
-    public ResponseEntity<Route> createRoute(@PathVariable(value = "cityId") Long cityId, @RequestBody RouteDTO routeDTO) {
+    public ResponseEntity<Route> createRoute(@PathVariable(value = "cityId") UUID cityId, @RequestBody RouteDTO routeDTO) {
 
         LOGGER.info("RouteController | createRoute is started");
         LOGGER.info("RouteController | createRoute | cityId : " + cityId);
@@ -53,8 +54,8 @@ public class RouteController {
     }
 
     @PutMapping(value = "/{cityId}/update-route/{routeId}",consumes = "application/json")
-    public ResponseEntity<Route> updateRoute(@PathVariable(value = "cityId") Long cityId,
-                                            @PathVariable(value = "routeId") Long routeId,
+    public ResponseEntity<Route> updateRoute(@PathVariable(value = "cityId") UUID cityId,
+                                            @PathVariable(value = "routeId") UUID routeId,
                                             @RequestBody RouteDTO routeDTO) {
 
         LOGGER.info("RouteController | updateRoute is started");

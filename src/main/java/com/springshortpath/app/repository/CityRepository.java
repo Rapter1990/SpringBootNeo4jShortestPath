@@ -5,6 +5,7 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface CityRepository extends Neo4jRepository<City,Long> {
 
@@ -12,17 +13,17 @@ public interface CityRepository extends Neo4jRepository<City,Long> {
     List<City> listAll();
 
     @Query("MATCH (city:City {id: $cityId}) RETURN city")
-    City getById(Long cityId);
+    City getById(UUID cityId);
 
     @Query("MATCH (city:City {name: $cityName}) RETURN city")
     City getByCityName(String cityName);
 
-    @Query("CREATE (city:City {name: $cityName}) RETURN city")
+    @Query("CREATE (city:City {id: randomUUID(), name: $cityName}) RETURN city")
     City saveCity(String cityName);
 
     @Query("MATCH (city:City {name: $cityName}) SET city.id = $cityId RETURN city")
-    City updateCity(Long cityId, String cityName);
+    City updateCity(UUID cityId, String cityName);
 
     @Query("MATCH (city:City {id: $cityId}) DELETE city")
-    void deleteCity(Long cityId);
+    void deleteCity(UUID cityId);
 }

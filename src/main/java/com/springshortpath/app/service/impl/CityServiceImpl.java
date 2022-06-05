@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -22,7 +23,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public City getById(Long cityId) {
+    public City getById(UUID cityId) {
         return cityRepository.getById(cityId);
     }
 
@@ -37,12 +38,12 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public City updateCity(Long cityId, City city) {
+    public City updateCity(UUID cityId, City city) {
         return cityRepository.updateCity(cityId,city.getName());
     }
 
     @Override
-    public void deleteCity(Long cityId) {
+    public void deleteCity(UUID cityId) {
         cityRepository.deleteCity(cityId);
     }
 }

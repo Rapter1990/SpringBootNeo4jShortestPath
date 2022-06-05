@@ -5,27 +5,28 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface RouteRepository extends Neo4jRepository<Route,Long> {
 
     @Query("MATCH (routes:Route) WHERE routes.id=$cityId RETURN routes")
-    List<Route> listAllByCityId(Long cityId);
+    List<Route> listAllByCityId(UUID cityId);
 
     @Query("MATCH (route:Route {id: $routeId}) RETURN route")
-    Route getById(Long routeId);
+    Route getById(UUID routeId);
 
-    @Query("CREATE (city:City {id: $cityId})-[:ROUTES]->(route:Route {from: $from, destination: $destination, departureTime: $departureTime," +
+    @Query("CREATE (city:City {id: $cityId})-[:ROUTES]->(route:Route {id: randomUUID(), from: $from, destination: $destination, departureTime: $departureTime," +
             "arriveTime: $arriveTime, duration: $duration}) " +
             "RETURN route")
-    Route saveRoute(Long cityId,String from,String destination,String departureTime,
-                    String arriveTime,Long duration);
+    Route saveRoute(UUID cityId, String from, String destination, String departureTime,
+                    String arriveTime, Long duration);
 
     @Query("MATCH (city:City {id: $cityId})-[:ROUTES]->(route:Route {id: $routeId}) " +
             "SET route.from = $from, route.destination = $destination,route.departureTime = $departureTime," +
             "route.arriveTime = $arriveTime, route.duration = $duration RETURN route")
-    Route updateRoute(Long cityId, Long routeId, String from, String destination,String departureTime,
+    Route updateRoute(UUID cityId, UUID routeId, String from, String destination,String departureTime,
                       String arriveTime,Long duration);
 
     @Query("MATCH (city:City {id: $cityId})-[:ROUTES]->(route:Route {id: $routeId}) DELETE route")
-    void deleteRoute(Long cityId, Long routeId);
+    void deleteRoute(UUID cityId, UUID routeId);
 }

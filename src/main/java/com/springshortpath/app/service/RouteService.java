@@ -4,16 +4,17 @@ import com.springshortpath.app.dto.RouteDTO;
 import com.springshortpath.app.model.Route;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface RouteService {
 
-    List<Route> listAllByCityId(Long cityId);
+    List<Route> listAllByCityId(UUID cityId);
 
-    Route getById(Long routeId);
+    Route getById(UUID routeId);
 
-    Route save(Long cityId, RouteDTO routeDTO);
+    Route save(UUID cityId, RouteDTO routeDTO);
 
-    Route update(Long cityId, Long routeId, RouteDTO routeDTO);
+    Route update(UUID cityId, UUID routeId, RouteDTO routeDTO);
 
-    void delete(Long cityId, Long routeId);
+    void delete(UUID cityId, UUID routeId);
 }
