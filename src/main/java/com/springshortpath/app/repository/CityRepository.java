@@ -21,7 +21,7 @@ public interface CityRepository extends Neo4jRepository<City,UUID> {
     @Query("CREATE (city:City {id: randomUUID(), name: $cityName}) RETURN city")
     City saveCity(String cityName);
 
-    @Query("MATCH (city:City {name: $cityName}) SET city.id = $cityId RETURN city")
+    @Query("MATCH (city:City {id: $cityId}) SET city.name = $cityName RETURN city")
     City updateCity(UUID cityId, String cityName);
 
     @Query("MATCH (city:City {id: $cityId}) DELETE city")
