@@ -62,7 +62,10 @@ public class RouteController {
         LOGGER.info("RouteController | updateRoute | cityId : " + cityId);
         LOGGER.info("RouteController | updateRoute | routeId : " + routeId);
 
-        Route updatedRoute = routeService.update(cityId, routeId, routeDTO);
+        RouteDTO dto = new RouteDTO(routeDTO.getFrom(),routeDTO.getDestination(),
+                routeDTO.getDepartureTime(),routeDTO.getArriveTime());
+
+        Route updatedRoute = routeService.update(cityId, routeId, dto);
         return new ResponseEntity<>(updatedRoute, HttpStatus.OK);
     }
 
