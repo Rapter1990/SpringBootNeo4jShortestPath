@@ -20,7 +20,7 @@ public class RouteDTO {
     private String destination;
     private String departureTime;
     private String arriveTime;
-    private Long duration;
+    private Double duration;
 
     public RouteDTO(String from,String destination,String departureTime, String arriveTime) {
         this.from = from;
@@ -30,7 +30,7 @@ public class RouteDTO {
         this.duration = calculateDuration();
     }
 
-    private long calculateDuration() {
+    private double calculateDuration() {
 
         LOGGER.info("RouteDTO | calculateDuration is started");
 
@@ -42,9 +42,13 @@ public class RouteDTO {
         LOGGER.info("RouteDTO | calculateDuration | departureDate : " + departureDate);
         LOGGER.info("RouteDTO | calculateDuration | arrivalDate : " + arrivalDate);
 
-        LOGGER.info("RouteDTO | calculateDuration | duration : " + Duration.between(departureDate, arrivalDate).toHours());
+        Duration duration = Duration.between(departureDate, arrivalDate);
 
-        return Duration.between(departureDate, arrivalDate).toHours();
+        double result = duration.toHours() + duration.toMinutesPart()/60f;
+
+        LOGGER.info("RouteDTO | calculateDuration | duration result : " + result);
+
+        return result;
     }
 
     private int getHours(final String time) {

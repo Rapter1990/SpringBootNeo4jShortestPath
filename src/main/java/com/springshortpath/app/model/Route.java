@@ -35,5 +35,5 @@ public class Route {
     private String arriveTime;
 
     @Property
-    private Long duration;
+    private Double duration;
 }
