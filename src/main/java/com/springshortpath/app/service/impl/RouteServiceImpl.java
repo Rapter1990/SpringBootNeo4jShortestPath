@@ -35,7 +35,7 @@ public class RouteServiceImpl implements RouteService {
         String destination = routeDTO.getDestination();
         String departureTime = routeDTO.getDepartureTime();
         String arriveTime = routeDTO.getArriveTime();
-        Long duration = routeDTO.getDuration();
+        double duration = routeDTO.getDuration();
 
         return routeRepository.saveRoute(cityId,from,destination,departureTime,
                 arriveTime,duration);
@@ -48,7 +48,7 @@ public class RouteServiceImpl implements RouteService {
         String destination = routeDTO.getDestination();
         String departureTime = routeDTO.getDepartureTime();
         String arriveTime = routeDTO.getArriveTime();
-        Long duration = routeDTO.getDuration();
+        double duration = routeDTO.getDuration();
 
 
         return routeRepository.updateRoute(cityId,routeId,from, destination,departureTime,
