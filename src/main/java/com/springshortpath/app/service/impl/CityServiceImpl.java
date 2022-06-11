@@ -5,10 +5,13 @@ import com.springshortpath.app.repository.CityRepository;
 import com.springshortpath.app.service.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CityServiceImpl implements CityService {
 
@@ -20,7 +23,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public City getById(Long cityId) {
+    public City getById(UUID cityId) {
         return cityRepository.getById(cityId);
     }
 
@@ -31,16 +34,16 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public City saveCity(City city) {
-        return cityRepository.saveCity(city.getName());
+        return cityRepository.save(city);
     }
 
     @Override
-    public City updateCity(Long cityId, City city) {
+    public City updateCity(UUID cityId, City city) {
         return cityRepository.updateCity(cityId,city.getName());
     }
 
     @Override
-    public void deleteCity(Long cityId) {
-        cityRepository.deleteUser(cityId);
+    public void deleteCity(UUID cityId) {
+        cityRepository.deleteCity(cityId);
     }
 }

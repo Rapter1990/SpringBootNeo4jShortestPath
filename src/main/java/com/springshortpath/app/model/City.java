@@ -4,10 +4,13 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
+import org.springframework.data.neo4j.core.support.UUIDStringGenerator;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Node
 @Data
@@ -18,9 +21,11 @@ import java.util.Set;
 public class City {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(GeneratedValue.UUIDGenerator.class)
+    @Property
+    private UUID id;
 
+    @Property
     private String name;
 
     @Relationship(type = "ROUTES", direction = Relationship.Direction.OUTGOING)
@@ -28,5 +33,15 @@ public class City {
 
     public City(String name) {
         this.name = name;
+    }
+
+    public City withId(UUID id) {
+        if (this.id.equals(id)) {
+            return this;
+        } else {
+            City newObject = new City(this.name);
+            newObject.id = id;
+            return newObject;
+        }
     }
 }

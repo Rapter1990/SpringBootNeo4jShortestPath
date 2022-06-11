@@ -5,24 +5,25 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
 import java.util.List;
+import java.util.UUID;
 
-public interface CityRepository extends Neo4jRepository<City,Long> {
+public interface CityRepository extends Neo4jRepository<City,UUID> {
 
-    @Query("MATCH (cities:City) RETURN cities")
+    @Query("MATCH (city:City) OPTIONAL MATCH (city)-[r:ROUTES]->(route:Route) RETURN city, collect(r), collect(route)")
     List<City> listAll();
 
-    @Query("MATCH (city:City {id: $cityId}) RETURN city")
-    City getById(Long cityId);
+    @Query("MATCH (city:City {id: $cityId}) OPTIONAL MATCH (city)-[r:ROUTES]->(route:Route) RETURN city, collect(r), collect(route)")
+    City getById(UUID cityId);
 
     @Query("MATCH (city:City {name: $cityName}) RETURN city")
     City getByCityName(String cityName);
 
-    @Query("CREATE (city:City {name: $cityName}) RETURN city")
+    @Query("CREATE (city:City {id: randomUUID(), name: $cityName}) RETURN city")
     City saveCity(String cityName);
 
-    @Query("MATCH (city:City {name: $cityName}) SET city.id = $cityId RETURN city")
-    City updateCity(Long cityId, String cityName);
+    @Query("MATCH (city:City {id: $cityId}) SET city.name = $cityName RETURN city")
+    City updateCity(UUID cityId, String cityName);
 
     @Query("MATCH (city:City {id: $cityId}) DELETE city")
-    void deleteUser(Long cityId);
+    void deleteCity(UUID cityId);
 }
