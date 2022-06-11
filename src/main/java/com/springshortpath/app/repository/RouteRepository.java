@@ -15,7 +15,9 @@ public interface RouteRepository extends Neo4jRepository<Route,UUID> {
     @Query("MATCH (route:Route {id: $routeId}) RETURN route")
     Route getById(UUID routeId);
 
-    @Query("CREATE (city:City {id: $cityId})-[:ROUTES]->(route:Route {id: randomUUID(), from: $from, destination: $destination, departureTime: $departureTime," +
+    @Query("MATCH (city:City {id: $cityId}) " +
+            "MERGE (city)-[:ROUTES]->(route:Route {id: randomUUID(), from: $from, destination: $destination, " +
+            "departureTime: $departureTime," +
             "arriveTime: $arriveTime, duration: $duration}) " +
             "RETURN route")
     Route saveRoute(UUID cityId, String from, String destination, String departureTime,
