@@ -72,12 +72,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.neo4j.procedure</groupId>
-            <artifactId>apoc</artifactId>
-            <version>${neo4j.procedure.version}</version>
-        </dependency>
-
 
     </dependencies>
 
