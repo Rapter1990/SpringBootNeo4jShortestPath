@@ -14,6 +14,7 @@ services:
       - $HOME/neo4j/plugins:/plugins
     environment:
       NEO4J_AUTH: neo4j/123456
+      NEO4JLABS_PLUGINS: ["apoc"]
       NEO4J_dbms_security_procedures_unrestricted: apoc.\\\*,gds.\\\*
       dbms_connector_bolt_listen__address: neo4j-db:7687
       dbms_connector_bolt_advertised__address: neo4j-db:7687
