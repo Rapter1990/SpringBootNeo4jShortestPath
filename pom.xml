@@ -15,7 +15,7 @@
     <description>Spring Boot Neo4j Shortest Path</description>
     <properties>
         <java.version>11</java.version>
-        <testcontainers.version>1.15.3</testcontainers.version>
+        <testcontainers.version>1.17.1</testcontainers.version>
         <neo4j.procedure.version>4.4.0.5</neo4j.procedure.version>
     </properties>
     <dependencies>
@@ -70,12 +70,6 @@
             <artifactId>neo4j</artifactId>
             <version>${testcontainers.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.neo4j.procedure</groupId>
-            <artifactId>apoc</artifactId>
-            <version>${neo4j.procedure.version}</version>
         </dependency>
 
 
