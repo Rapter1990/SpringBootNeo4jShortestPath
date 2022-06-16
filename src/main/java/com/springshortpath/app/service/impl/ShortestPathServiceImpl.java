@@ -51,7 +51,7 @@ public class ShortestPathServiceImpl implements ShortestPathService {
 
         String departureCity = connection.start().get("name").asString();
         String arriveCity = connection.end().get("name").asString();
-        int length = connection.length();
+        int length = connection.length() - 1;
 
         return new PathShortestConnectionResponse(departureCity, arriveCity, length);
     }
@@ -60,8 +60,9 @@ public class ShortestPathServiceImpl implements ShortestPathService {
 
         String departureCity = connection.start().get("name").asString();
         String arriveCity = connection.end().get("name").asString();
-        Stream<Relationship> targetStream = StreamSupport.stream(connection.relationships().spliterator(), false);
-        int totalInTime = targetStream.mapToInt(it -> it.get("duration").asInt()).sum();
+        int totalInTime = StreamSupport.stream(connection.nodes().spliterator(), false)
+                .filter(node -> node.hasLabel("Route"))
+                .mapToInt(route -> route.get("duration").asInt()).sum();
 
         return new PathShortestTimeResponse(departureCity, arriveCity, totalInTime);
     }
