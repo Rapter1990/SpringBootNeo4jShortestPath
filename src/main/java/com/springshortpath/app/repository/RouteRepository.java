@@ -16,11 +16,13 @@ public interface RouteRepository extends Neo4jRepository<Route,UUID> {
     Route getById(UUID routeId);
 
     @Query("MATCH (city:City {id: $cityId}) " +
+            "MATCH (destinationCity:City {id: $destinationCityId}) " +
             "MERGE (city)-[:ROUTES]->(route:Route {id: randomUUID(), from: $from, destination: $destination, " +
             "departureTime: $departureTime," +
             "arriveTime: $arriveTime, duration: $duration}) " +
+            "-[:ROUTES]->(destinationCity)" +
             "RETURN route")
-    Route saveRoute(UUID cityId, String from, String destination, String departureTime,
+    Route saveRoute(UUID cityId, UUID destinationCityId, String from, String destination, String departureTime,
                     String arriveTime, double duration);
 
     @Query("MATCH (city:City {id: $cityId})-[:ROUTES]->(route:Route {id: $routeId}) " +
@@ -29,6 +31,8 @@ public interface RouteRepository extends Neo4jRepository<Route,UUID> {
     Route updateRoute(UUID cityId, UUID routeId, String from, String destination,String departureTime,
                       String arriveTime,double duration);
 
-    @Query("MATCH (city:City {id: $cityId})-[r:ROUTES]->(route:Route {id: $routeId}) DELETE r, route")
+    @Query("MATCH (route:Route {id: $routeId}) " +
+            "OPTIONAL MATCH (route)-[r:ROUTES]-(city:City)" +
+            "DELETE route, r, city")
     void deleteRoute(UUID cityId, UUID routeId);
 }

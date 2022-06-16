@@ -39,8 +39,10 @@ public class RouteController {
         return new ResponseEntity<>(routeList, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/{cityId}/create-route", consumes = "application/json")
-    public ResponseEntity<Route> createRoute(@PathVariable(value = "cityId") UUID cityId, @RequestBody RouteDTO routeDTO) {
+    @PostMapping(value = "/{cityId}/{destinationCityId}/create-route", consumes = "application/json")
+    public ResponseEntity<Route> createRoute(@PathVariable(value = "cityId") UUID cityId,
+                                             @PathVariable(value = "destinationCityId") UUID destinationCityId,
+                                             @RequestBody RouteDTO routeDTO) {
 
         LOGGER.info("RouteController | createRoute is started");
         LOGGER.info("RouteController | createRoute | cityId : " + cityId);
@@ -49,7 +51,7 @@ public class RouteController {
                 routeDTO.getDepartureTime(),routeDTO.getArriveTime());
 
 
-        Route savedRoute = routeService.save(cityId, dto);
+        Route savedRoute = routeService.save(cityId, destinationCityId, dto);
         return new ResponseEntity<>(savedRoute, HttpStatus.CREATED);
     }
 

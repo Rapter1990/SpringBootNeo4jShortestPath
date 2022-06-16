@@ -29,7 +29,7 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public Route save(UUID cityId, RouteDTO routeDTO) {
+    public Route save(UUID cityId, UUID destinationCityId, RouteDTO routeDTO) {
 
         String from = routeDTO.getFrom();
         String destination = routeDTO.getDestination();
@@ -37,7 +37,7 @@ public class RouteServiceImpl implements RouteService {
         String arriveTime = routeDTO.getArriveTime();
         double duration = routeDTO.getDuration();
 
-        return routeRepository.saveRoute(cityId,from,destination,departureTime,
+        return routeRepository.saveRoute(cityId,destinationCityId,from,destination,departureTime,
                 arriveTime,duration);
     }
 

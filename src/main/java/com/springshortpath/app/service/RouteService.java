@@ -12,7 +12,7 @@ public interface RouteService {
 
     Route getById(UUID routeId);
 
-    Route save(UUID cityId, RouteDTO routeDTO);
+    Route save(UUID cityId, UUID destinationCityId, RouteDTO routeDTO);
 
     Route update(UUID cityId, UUID routeId, RouteDTO routeDTO);
 
