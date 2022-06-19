@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
+import org.springframework.data.neo4j.core.support.UUIDStringGenerator;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,6 +20,7 @@ import java.util.UUID;
 public class City {
 
     @Id
+    @GeneratedValue(GeneratedValue.UUIDGenerator.class)
     @Property
     private UUID id;
 
@@ -30,5 +32,15 @@ public class City {
 
     public City(String name) {
         this.name = name;
+    }
+
+    public City withId(UUID id) {
+        if (this.id.equals(id)) {
+            return this;
+        } else {
+            City newObject = new City(this.name);
+            newObject.id = id;
+            return newObject;
+        }
     }
 }
