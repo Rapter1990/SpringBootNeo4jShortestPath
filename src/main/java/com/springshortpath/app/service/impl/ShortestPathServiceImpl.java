@@ -7,13 +7,11 @@ import com.springshortpath.app.repository.ShortestPathRepository;
 import com.springshortpath.app.service.ShortestPathService;
 import lombok.RequiredArgsConstructor;
 import org.neo4j.driver.internal.value.PathValue;
-import org.neo4j.driver.types.Relationship;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @Service

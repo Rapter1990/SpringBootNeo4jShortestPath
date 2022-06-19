@@ -1,0 +1,363 @@
+{
+	"info": {
+		"_postman_id": "5cebe33a-f42e-4d2d-8d95-15b712aaec56",
+		"name": "springneo4jshortestpath",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add City",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"İstanbul\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8077/api/v1/city",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8077",
+					"path": [
+						"api",
+						"v1",
+						"city"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Cities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8077/api/v1/city/cities",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8077",
+					"path": [
+						"api",
+						"v1",
+						"city",
+						"cities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get City by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8077/api/v1/city/id/ab4b7c9d-1aaf-4553-9a45-3e491de0ff2b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8077",
+					"path": [
+						"api",
+						"v1",
+						"city",
+						"id",
+						"ab4b7c9d-1aaf-4553-9a45-3e491de0ff2b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get City by Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8077/api/v1/city/name/İstanbul",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8077",
+					"path": [
+						"api",
+						"v1",
+						"city",
+						"name",
+						"İstanbul"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update City By Id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Ankara\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8077/api/v1/city/e2d5bc14-e599-40ad-a887-6044fbd1fb3b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8077",
+					"path": [
+						"api",
+						"v1",
+						"city",
+						"e2d5bc14-e599-40ad-a887-6044fbd1fb3b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete City By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8077/api/v1/city/ab4b7c9d-1aaf-4553-9a45-3e491de0ff2b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8077",
+					"path": [
+						"api",
+						"v1",
+						"city",
+						"ab4b7c9d-1aaf-4553-9a45-3e491de0ff2b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Route",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\" : \"İstanbul\",\r\n    \"destination\" : \"Ankara\",\r\n    \"departureTime\" : \"9:00\",\r\n    \"arriveTime\" : \"11:30\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8077/api/v1/route/d0dcd2ef-3677-4ee1-863c-572cacfdd23a/0f5da0b1-9257-42b1-b393-09dd559094c2/create-route",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8077",
+					"path": [
+						"api",
+						"v1",
+						"route",
+						"d0dcd2ef-3677-4ee1-863c-572cacfdd23a",
+						"0f5da0b1-9257-42b1-b393-09dd559094c2",
+						"create-route"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Route By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8077/api/v1/route/96eb4281-d474-4156-b678-dc2e4bc5a55a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8077",
+					"path": [
+						"api",
+						"v1",
+						"route",
+						"96eb4281-d474-4156-b678-dc2e4bc5a55a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Routes By City Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8077/api/v1/route/4565a8e1-9c3e-4b35-9b8a-52d5ce6ce10d/routes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8077",
+					"path": [
+						"api",
+						"v1",
+						"route",
+						"4565a8e1-9c3e-4b35-9b8a-52d5ce6ce10d",
+						"routes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Route By Id and City Id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\" : \"İstanbul\",\r\n    \"destination\" : \"Antalya\",\r\n    \"departureTime\" : \"9:00\",\r\n    \"arriveTime\" : \"11:30\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8077/api/v1/route/0/update-route/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8077",
+					"path": [
+						"api",
+						"v1",
+						"route",
+						"0",
+						"update-route",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Route by Id and City Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8077/api/v1/route/0/delete-route/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8077",
+					"path": [
+						"api",
+						"v1",
+						"route",
+						"0",
+						"delete-route",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ShortestPath by Total Connection",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\" : \"İstanbul\",\r\n    \"destination\" : \"Ankara\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8077/api/v1/shortestpath/shortest-path",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8077",
+					"path": [
+						"api",
+						"v1",
+						"shortestpath",
+						"shortest-path"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ShortestPath by Total Duration",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\" : \"İstanbul\",\r\n    \"destination\" : \"Ankara\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8077/api/v1/shortestpath/shortest-path-in-time",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8077",
+					"path": [
+						"api",
+						"v1",
+						"shortestpath",
+						"shortest-path-in-time"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
