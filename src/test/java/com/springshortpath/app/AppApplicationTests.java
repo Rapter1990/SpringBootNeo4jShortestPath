@@ -137,7 +137,7 @@ class AppApplicationTests {
 
     @Test
     void addRoute() throws Exception {
-        mockMvc.perform(post("/api/v1/route/" + cityId1 + "/create-route")
+        mockMvc.perform(post("/api/v1/route/" + cityId1 + "/" + cityId2 + "/create-route")
                 .contentType("application/json")
                 .content("{\"from\" : \"Istanbul\", \"destination\" : \"Ankara\", \"departureTime\" : \"9:00\", \"arriveTime\" : \"11:00\"}")
                 .accept("application/json"))
