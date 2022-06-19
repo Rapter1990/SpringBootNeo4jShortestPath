@@ -46,6 +46,7 @@ public class RouteController {
 
         LOGGER.info("RouteController | createRoute is started");
         LOGGER.info("RouteController | createRoute | cityId : " + cityId);
+        LOGGER.info("RouteController | createRoute | destinationCityId : " + destinationCityId);
 
         RouteDTO dto = new RouteDTO(routeDTO.getFrom(),routeDTO.getDestination(),
                 routeDTO.getDepartureTime(),routeDTO.getArriveTime());
