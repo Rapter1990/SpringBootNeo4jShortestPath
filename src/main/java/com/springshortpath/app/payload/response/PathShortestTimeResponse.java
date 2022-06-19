@@ -9,7 +9,7 @@ public class PathShortestTimeResponse {
 
     private String departureCity;
     private String arrivalCity;
-    private Integer totalInTime;
+    private Double totalInTime;
 
     public PathShortestTimeResponse(PathShortestTimeResponse pathShortestTimeResponse) {
         this.departureCity = pathShortestTimeResponse.getDepartureCity();

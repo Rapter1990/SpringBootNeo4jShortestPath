@@ -60,9 +60,9 @@ public class ShortestPathServiceImpl implements ShortestPathService {
 
         String departureCity = connection.start().get("name").asString();
         String arriveCity = connection.end().get("name").asString();
-        int totalInTime = StreamSupport.stream(connection.nodes().spliterator(), false)
+        Double totalInTime = StreamSupport.stream(connection.nodes().spliterator(), false)
                 .filter(node -> node.hasLabel("Route"))
-                .mapToInt(route -> route.get("duration").asInt()).sum();
+                .mapToDouble(route -> route.get("duration").asDouble()).sum();
 
         return new PathShortestTimeResponse(departureCity, arriveCity, totalInTime);
     }
