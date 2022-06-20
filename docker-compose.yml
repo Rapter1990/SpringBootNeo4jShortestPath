@@ -13,11 +13,11 @@ services:
       - $HOME/neo4j/import:/import
       - $HOME/neo4j/plugins:/plugins
     environment:
-      - NEO4J_AUTH: neo4j/123456
-      - NEO4JLABS_PLUGINS: ["apoc"]
-      - NEO4J_dbms_security_procedures_unrestricted: apoc.\\\*,gds.\\\*
-      - dbms_connector_bolt_listen__address: neo4j-db:7687
-      - dbms_connector_bolt_advertised__address: neo4j-db:7687
+      NEO4J_AUTH: "neo4j/123456"
+      NEO4JLABS_PLUGINS: '["apoc"]'
+      NEO4J_dbms_security_procedures_unrestricted: apoc.\\\*,gds.\\\*
+      dbms_connector_bolt_listen__address: neo4j-db:7687
+      dbms_connector_bolt_advertised__address: neo4j-db:7687
     healthcheck:
       test: cypher-shell --username neo4j --password 123456 'MATCH (n) RETURN COUNT(n);' # Checks if neo4j server is up and running
       interval: 10s
@@ -36,9 +36,9 @@ services:
     links:
       - neo4j-db
     environment:
-      - NEO4J_URI: bolt://neo4j-db:7687
-      - NEO4J_USER: neo4j
-      - NEO4J_PASSWORD: 123456
+      NEO4J_URI: bolt://neo4j-db:7687
+      NEO4J_USER: neo4j
+      NEO4J_PASSWORD: 123456
 
 volumes:
   app-neo4j-db:
