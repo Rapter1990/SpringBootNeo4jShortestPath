@@ -33,7 +33,7 @@ import java.util.UUID;
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureWebTestClient
-class AppApplicationTests {
+public class AppApplicationTests {
 
     static Neo4jContainer<?> container = new Neo4jContainer<>("neo4j:4.3-community")
             .withLabsPlugins(Neo4jLabsPlugin.APOC);
