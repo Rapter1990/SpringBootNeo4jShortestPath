@@ -18,7 +18,6 @@ public class RouteMapper {
         routeResponse.setArriveTime(route.getArriveTime());
         routeResponse.setDepartureTime(route.getDepartureTime());
         routeResponse.setDestination(route.getDestination());
-        routeResponse.setDestinationCity(route.getDestinationCity().getName());
         routeResponse.setDuration(route.getDuration());
         routeResponse.setId(route.getId());
 

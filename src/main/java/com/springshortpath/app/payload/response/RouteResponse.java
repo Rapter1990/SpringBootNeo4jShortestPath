@@ -17,5 +17,4 @@ public class RouteResponse {
     private String departureTime;
     private String arriveTime;
     private Double duration;
-    private String destinationCity;
 }

@@ -71,6 +71,8 @@ public class RouteController {
 
         Route savedRoute = routeService.save(cityId, destinationCityId, dto);
 
+        LOGGER.info("RouteController | createRoute | savedRoute : " + savedRoute.toString());
+
         RouteResponse routeResponse = routeMapper.mapFromRouteToRouteResponse(savedRoute);
 
         LOGGER.info("RouteController | createRoute | routeResponse : " + routeResponse.toString());
@@ -91,6 +93,8 @@ public class RouteController {
                 routeDTO.getDepartureTime(),routeDTO.getArriveTime());
 
         Route updatedRoute = routeService.update(cityId, routeId, dto);
+
+        LOGGER.info("RouteController | updateRoute | updatedRoute : " + updatedRoute.toString());
 
         RouteResponse routeResponse = routeMapper.mapFromRouteToRouteResponse(updatedRoute);
 
