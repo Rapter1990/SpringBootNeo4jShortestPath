@@ -1,7 +1,9 @@
 package com.springshortpath.app.controller;
 
 import com.springshortpath.app.dto.CityDTO;
+import com.springshortpath.app.mapper.CityMapper;
 import com.springshortpath.app.model.City;
+import com.springshortpath.app.payload.response.CityResponse;
 import com.springshortpath.app.service.CityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,15 +22,25 @@ public class CityController {
 
     private final CityService cityService;
 
-    public CityController(CityService cityService) {
+    private final CityMapper cityMapper;
+
+    public CityController(CityService cityService,CityMapper cityMapper) {
         this.cityService = cityService;
+        this.cityMapper = cityMapper;
     }
 
     @GetMapping("/id/{cityId}")
-    public City getCityById(@PathVariable(value = "cityId") UUID cityId) {
+    public CityResponse getCityById(@PathVariable(value = "cityId") UUID cityId) {
         LOGGER.info("CityController | getByCityId is started");
         LOGGER.info("CityController | getByCityId | cityId : " + cityId);
-        return cityService.getById(cityId);
+
+        City city = cityService.getById(cityId);
+
+        CityResponse cityResponse = cityMapper.mapFromCityToCityResponse(city);
+
+        LOGGER.info("CityController | getByCityId | cityResponse : " + cityResponse.toString());
+
+        return cityResponse;
     }
 
     /*
@@ -49,38 +61,61 @@ public class CityController {
     ]
      */
     @GetMapping("/cities")
-    public ResponseEntity<List<City>> getAllCities(){
+    public ResponseEntity<List<CityResponse>> getAllCities(){
         LOGGER.info("CityController | getAllCities is started");
         List<City> cityList = cityService.listAll();
         LOGGER.info("CityController | getAllCities | cityList : " + cityList.toString());
-        return new ResponseEntity<>(cityList, HttpStatus.OK);
+
+        List<CityResponse> cityResponseList = cityMapper.mapCityListToCityResponseList(cityList);
+
+        LOGGER.info("CityController | getAllCities | cityResponseList : " + cityResponseList.toString());
+
+        return new ResponseEntity<>(cityResponseList, HttpStatus.OK);
     }
 
     @GetMapping("/name/{cityName}")
-    public City getCityByName(@PathVariable(value = "cityName") String cityName) {
+    public CityResponse getCityByName(@PathVariable(value = "cityName") String cityName) {
         LOGGER.info("CityController | getByCityName is started");
         LOGGER.info("CityController | getByCityName | cityName : " + cityName);
-        return cityService.getByCityName(cityName);
+
+        City city = cityService.getByCityName(cityName);
+
+        CityResponse cityResponse = cityMapper.mapFromCityToCityResponse(city);
+
+        LOGGER.info("CityController | getCityByName | cityResponse : " + cityResponse.toString());
+
+        return cityResponse;
+
     }
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<City> createCity(@RequestBody CityDTO cityDTO) {
+    public ResponseEntity<CityResponse> createCity(@RequestBody CityDTO cityDTO) {
         LOGGER.info("CityController | createCity is started");
         LOGGER.info("CityController | createCity | city name : " + cityDTO.getName());
         City city = new City(cityDTO.getName());
         City savedCity = cityService.saveCity(city);
-        return new ResponseEntity<>(savedCity, HttpStatus.CREATED);
+
+        CityResponse cityResponse = cityMapper.mapFromCityToCityResponse(city);
+
+        LOGGER.info("CityController | createCity | cityResponse : " + cityResponse.toString());
+
+        return new ResponseEntity<>(cityResponse, HttpStatus.CREATED);
     }
 
     @PutMapping("/{cityId}")
-    public ResponseEntity<City> updateCity(@PathVariable(value = "cityId") UUID cityId, @RequestBody CityDTO cityDTO) {
+    public ResponseEntity<CityResponse> updateCity(@PathVariable(value = "cityId") UUID cityId, @RequestBody CityDTO cityDTO) {
         LOGGER.info("CityController | updateCity is started");
         LOGGER.info("CityController | updateCity | cityId : " + cityId);
         LOGGER.info("CityController | updateCity | update city name : " + cityDTO.getName());
         City city = new City(cityDTO.getName());
         City updatedCity = cityService.updateCity(cityId,city);
         LOGGER.info("CityController | updateCity | updatedCity : " + updatedCity.toString());
-        return new ResponseEntity<>(updatedCity, HttpStatus.OK);
+
+        CityResponse cityResponse = cityMapper.mapFromCityToCityResponse(city);
+
+        LOGGER.info("CityController | updateCity | cityResponse : " + cityResponse.toString());
+
+        return new ResponseEntity<>(cityResponse, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{cityId}")

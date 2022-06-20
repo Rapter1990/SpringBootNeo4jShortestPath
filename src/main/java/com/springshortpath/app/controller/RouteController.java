@@ -1,7 +1,9 @@
 package com.springshortpath.app.controller;
 
 import com.springshortpath.app.dto.RouteDTO;
+import com.springshortpath.app.mapper.RouteMapper;
 import com.springshortpath.app.model.Route;
+import com.springshortpath.app.payload.response.RouteResponse;
 import com.springshortpath.app.service.RouteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,27 +22,42 @@ public class RouteController {
 
     private final RouteService routeService;
 
-    public RouteController(RouteService routeService) {
+    private final RouteMapper routeMapper;
+
+    public RouteController(RouteService routeService,RouteMapper routeMapper) {
         this.routeService = routeService;
+        this.routeMapper = routeMapper;
     }
 
     @GetMapping("/{routeId}")
-    public ResponseEntity<Route> getByRouteId(@PathVariable(value = "routeId") UUID routeId) {
+    public ResponseEntity<RouteResponse> getByRouteId(@PathVariable(value = "routeId") UUID routeId) {
         LOGGER.info("RouteController | getByRouteId is started");
         LOGGER.info("RouteController | getByRouteId | routeId : " + routeId);
-        return new ResponseEntity<>(routeService.getById(routeId), HttpStatus.OK);
+
+        Route route = routeService.getById(routeId);
+
+        RouteResponse routeResponse = routeMapper.mapFromRouteToRouteResponse(route);
+
+        LOGGER.info("RouteController | getByRouteId | routeResponse : " + routeResponse.toString());
+
+        return new ResponseEntity<>(routeResponse, HttpStatus.OK);
     }
 
     @GetMapping("/{cityId}/routes")
-    public ResponseEntity<List<Route>> getAllRoutes(@PathVariable(value = "cityId") UUID cityId){
+    public ResponseEntity<List<RouteResponse>> getAllRoutes(@PathVariable(value = "cityId") UUID cityId){
         LOGGER.info("RouteController | getAllRoutes is started");
         LOGGER.info("RouteController | getAllRoutes | cityId : " + cityId);
         List<Route> routeList = routeService.listAllByCityId(cityId);
-        return new ResponseEntity<>(routeList, HttpStatus.OK);
+
+        List<RouteResponse> routeResponsesList = routeMapper.mapRouteListToRouteResponseList(routeList);
+
+        LOGGER.info("RouteController | getAllRoutes | routeResponsesList : " + routeResponsesList.toString());
+
+        return new ResponseEntity<>(routeResponsesList, HttpStatus.OK);
     }
 
     @PostMapping(value = "/{cityId}/{destinationCityId}/create-route", consumes = "application/json")
-    public ResponseEntity<Route> createRoute(@PathVariable(value = "cityId") UUID cityId,
+    public ResponseEntity<RouteResponse> createRoute(@PathVariable(value = "cityId") UUID cityId,
                                              @PathVariable(value = "destinationCityId") UUID destinationCityId,
                                              @RequestBody RouteDTO routeDTO) {
 
@@ -53,11 +70,16 @@ public class RouteController {
 
 
         Route savedRoute = routeService.save(cityId, destinationCityId, dto);
-        return new ResponseEntity<>(savedRoute, HttpStatus.CREATED);
+
+        RouteResponse routeResponse = routeMapper.mapFromRouteToRouteResponse(savedRoute);
+
+        LOGGER.info("RouteController | createRoute | routeResponse : " + routeResponse.toString());
+
+        return new ResponseEntity<>(routeResponse, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{cityId}/update-route/{routeId}",consumes = "application/json")
-    public ResponseEntity<Route> updateRoute(@PathVariable(value = "cityId") UUID cityId,
+    public ResponseEntity<RouteResponse> updateRoute(@PathVariable(value = "cityId") UUID cityId,
                                             @PathVariable(value = "routeId") UUID routeId,
                                             @RequestBody RouteDTO routeDTO) {
 
@@ -69,7 +91,12 @@ public class RouteController {
                 routeDTO.getDepartureTime(),routeDTO.getArriveTime());
 
         Route updatedRoute = routeService.update(cityId, routeId, dto);
-        return new ResponseEntity<>(updatedRoute, HttpStatus.OK);
+
+        RouteResponse routeResponse = routeMapper.mapFromRouteToRouteResponse(updatedRoute);
+
+        LOGGER.info("RouteController | updateRoute | routeResponse : " + routeResponse.toString());
+
+        return new ResponseEntity<>(routeResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("{cityId}/delete-route/{routeId}")
