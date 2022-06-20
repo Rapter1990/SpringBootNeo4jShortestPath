@@ -95,7 +95,7 @@ public class CityController {
         City city = new City(cityDTO.getName());
         City savedCity = cityService.saveCity(city);
 
-        CityResponse cityResponse = cityMapper.mapFromCityToCityResponse(city);
+        CityResponse cityResponse = cityMapper.mapFromCityToCityResponse(savedCity);
 
         LOGGER.info("CityController | createCity | cityResponse : " + cityResponse.toString());
 

@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public interface ShortestPathRepository extends ReactiveNeo4jRepository<City, UUID> {
 
-    @Query("MATCH p=shortestPath((a:City {name:$from})-[*]->(b:City {name:$to})) RETURN p")
+    @Query("MATCH p=shortestPath((a:City {name:$from})-[*..20]->(b:City {name:$to})) RETURN p")
     Flux<PathValue> shortestPath(@Param("from") String from, @Param("to") String to);
 
     @Query("MATCH (a:City {name: $from})\n"
