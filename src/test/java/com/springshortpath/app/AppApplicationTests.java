@@ -50,7 +50,7 @@ public class AppApplicationTests {
     @DynamicPropertySource
     static void properties(DynamicPropertyRegistry registry) {
         registry.add("spring.neo4j.authentication.username", () -> "neo4j");
-        registry.add("spring.neo4j.authentication.password", () -> "123456");
+        registry.add("spring.neo4j.authentication.password", () -> container.getAdminPassword());
         registry.add("spring.neo4j.uri", () -> container.getBoltUrl());
     }
 
@@ -125,11 +125,11 @@ public class AppApplicationTests {
         try {
             mockMvc.perform(put("/api/v1/city/id/" + cityId1)
                     .contentType("application/json")
-                    .content("{\"name\" : \"Ankara\"}")
+                    .content("{\"name\" : \"Antalya\"}")
                     .accept("application/json"))
                     .andDo(print())
                     .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.name").value("Ankara"));
+                    .andExpect(jsonPath("$.name").value("Antalya"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -155,12 +155,42 @@ public class AppApplicationTests {
     }
 
     @Test
+    void getRouteById() throws Exception {
+        try {
+            mockMvc.perform(get("/api/v1/route/" + routeId).accept("application/json"))
+                    .andDo(print())
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.from").value("Istanbul"))
+                    .andExpect(jsonPath("$.destination").value("Ankara"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     void listRoutesByCity() throws Exception {
         mockMvc.perform(get("/api/v1/route/" +  cityId1 + "/routes").accept("application/json"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0]['from']").value("Istanbul"))
                 .andExpect(jsonPath("$[0]['destination']").value("Ankara"));
+    }
+
+    @Test
+    void updateRoute(){
+        try {
+            mockMvc.perform(put("/api/v1/route/" + cityId1 + "/update-route/" + routeId)
+                    .contentType("application/json")
+                    .content("{\"from\" : \"Istanbul\", \"destination\" : \"Antalya\", \"departureTime\" : \"9:00\", \"arriveTime\" : \"11:30\"}")
+                    .accept("application/json"))
+                    .andDo(print())
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.from").value("Istanbul"))
+                    .andExpect(jsonPath("$.destination").value("Antalya"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
