@@ -87,7 +87,7 @@ public class AppApplicationTests {
             session.run("CREATE (:City{id:$cityId2, name:'Ankara'})" +
                             "-[:ROUTES]->(:Route{id:$routeId3,from:'Ankara', destination:'Antalya', duration: 2}) " +
                             "-[:ROUTES]->(:City{id:$cityId3, name:'Antalya'})",
-                    Map.of("cityId2", cityId2.toString(), "cityId3", cityId2.toString(), "routeId3", routeId3.toString()))
+                    Map.of("cityId2", cityId2.toString(), "cityId3", cityId3.toString(), "routeId3", routeId3.toString()))
                     .consume();
         }
     }
