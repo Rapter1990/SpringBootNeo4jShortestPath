@@ -56,7 +56,11 @@ public class AppApplicationTests {
 
     private final UUID cityId1 = UUID.randomUUID();
     private final UUID cityId2 = UUID.randomUUID();
-    private final UUID routeId = UUID.randomUUID();
+    private final UUID cityId3 = UUID.randomUUID();
+
+    private final UUID routeId1 = UUID.randomUUID();
+    private final UUID routeId2 = UUID.randomUUID();
+    private final UUID routeId3 = UUID.randomUUID();
 
     @BeforeAll
     static void startContainer() {
@@ -69,9 +73,21 @@ public class AppApplicationTests {
         try (Session session = driver.session()) {
             session.run("MATCH (n) detach delete n").consume();
             session.run("CREATE (:City{id:$cityId1, name:'Istanbul'})" +
-                            "-[:ROUTES]->(:Route{id:$routeId,from:'Istanbul', destination:'Ankara', duration: 2}) " +
+                            "-[:ROUTES]->(:Route{id:$routeId1,from:'Istanbul', destination:'Ankara', duration: 2}) " +
                             "-[:ROUTES]->(:City{id:$cityId2, name:'Ankara'})",
-                    Map.of("cityId1", cityId1.toString(), "cityId2", cityId2.toString(), "routeId", routeId.toString()))
+                    Map.of("cityId1", cityId1.toString(), "cityId2", cityId2.toString(), "routeId1", routeId1.toString()))
+                    .consume();
+
+            session.run("CREATE (:City{id:$cityId1, name:'Istanbul'})" +
+                            "-[:ROUTES]->(:Route{id:$routeId2,from:'Istanbul', destination:'Antalya', duration: 3}) " +
+                            "-[:ROUTES]->(:City{id:$cityId3, name:'Antalya'})",
+                    Map.of("cityId1", cityId1.toString(), "cityId3", cityId3.toString(), "routeId2", routeId2.toString()))
+                    .consume();
+
+            session.run("CREATE (:City{id:$cityId2, name:'Ankara'})" +
+                            "-[:ROUTES]->(:Route{id:$routeId3,from:'Ankara', destination:'Antalya', duration: 2}) " +
+                            "-[:ROUTES]->(:City{id:$cityId3, name:'Antalya'})",
+                    Map.of("cityId2", cityId2.toString(), "cityId3", cityId2.toString(), "routeId3", routeId3.toString()))
                     .consume();
         }
     }
@@ -157,7 +173,7 @@ public class AppApplicationTests {
     @Test
     void getRouteById() throws Exception {
         try {
-            mockMvc.perform(get("/api/v1/route/" + routeId).accept("application/json"))
+            mockMvc.perform(get("/api/v1/route/" + routeId1).accept("application/json"))
                     .andDo(print())
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.from").value("Istanbul"))
@@ -180,7 +196,7 @@ public class AppApplicationTests {
     @Test
     void updateRoute(){
         try {
-            mockMvc.perform(put("/api/v1/route/" + cityId1 + "/update-route/" + routeId)
+            mockMvc.perform(put("/api/v1/route/" + cityId1 + "/update-route/" + routeId1)
                     .contentType("application/json")
                     .content("{\"from\" : \"Istanbul\", \"destination\" : \"Antalya\", \"departureTime\" : \"9:00\", \"arriveTime\" : \"11:30\"}")
                     .accept("application/json"))
@@ -195,7 +211,7 @@ public class AppApplicationTests {
 
     @Test
     void deleteRoute() throws Exception {
-        mockMvc.perform(delete("/api/v1/route/" + cityId1 + "/delete-route/" + routeId)
+        mockMvc.perform(delete("/api/v1/route/" + cityId1 + "/delete-route/" + routeId1)
                 .accept("application/json"))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -228,6 +244,30 @@ public class AppApplicationTests {
                 .expectStatus().isOk()
                 .expectBody()
                 .json("{\"departureCity\":\"Istanbul\",\"arrivalCity\":\"Ankara\",\"totalInTime\":2}");
+    }
+
+    @Test
+    void shortestPathNewConnection(){
+        webTestClient.method(HttpMethod.GET).uri("/api/v1/shortestpath/shortest-path")
+                .accept(MediaType.APPLICATION_JSON)
+                .bodyValue("{\"from\":\"Istanbul\", \"destination\":\"Antalya\"}")
+                .header("content-type", "application/json")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .json("{\"departureCity\":\"Istanbul\",\"arrivalCity\":\"Antalya\",\"totalConnections\":1}");
+    }
+
+    @Test
+    void shortestPathInTimeNewConnection(){
+        webTestClient.method(HttpMethod.GET).uri("/api/v1/shortestpath/shortest-path-in-time")
+                .accept(MediaType.APPLICATION_JSON)
+                .bodyValue("{\"from\":\"Istanbul\", \"destination\":\"Antalya\"}")
+                .header("content-type", "application/json")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .json("{\"departureCity\":\"Istanbul\",\"arrivalCity\":\"Antalya\",\"totalInTime\":3}");
     }
 
     @AfterAll
