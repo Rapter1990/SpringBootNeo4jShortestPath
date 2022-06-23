@@ -123,7 +123,7 @@ public class AppApplicationTests {
     @Test
     void updateCity(){
         try {
-            mockMvc.perform(put("/api/v1/city/id/" + cityId1)
+            mockMvc.perform(put("/api/v1/city/" + cityId1)
                     .contentType("application/json")
                     .content("{\"name\" : \"Antalya\"}")
                     .accept("application/json"))

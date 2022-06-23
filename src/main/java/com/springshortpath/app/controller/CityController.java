@@ -115,7 +115,7 @@ public class CityController {
 
         LOGGER.info("CityController | updateCity | cityResponse : " + cityResponse.toString());
 
-        return new ResponseEntity<>(cityResponse, HttpStatus.CREATED);
+        return new ResponseEntity<>(cityResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{cityId}")
