@@ -72,19 +72,19 @@ public class AppApplicationTests {
     void initializeData() {
         try (Session session = driver.session()) {
             session.run("MATCH (n) detach delete n").consume();
-            session.run("CREATE (:City{id:$cityId1, name:'Istanbul'})" +
+            session.run("MERGE (:City{id:$cityId1, name:'Istanbul'})" +
                             "-[:ROUTES]->(:Route{id:$routeId1,from:'Istanbul', destination:'Ankara', duration: 2}) " +
                             "-[:ROUTES]->(:City{id:$cityId2, name:'Ankara'})",
                     Map.of("cityId1", cityId1.toString(), "cityId2", cityId2.toString(), "routeId1", routeId1.toString()))
                     .consume();
 
-            session.run("CREATE (:City{id:$cityId1, name:'Istanbul'})" +
+            session.run("MERGE (:City{id:$cityId1, name:'Istanbul'})" +
                             "-[:ROUTES]->(:Route{id:$routeId2,from:'Istanbul', destination:'Antalya', duration: 3}) " +
                             "-[:ROUTES]->(:City{id:$cityId3, name:'Antalya'})",
                     Map.of("cityId1", cityId1.toString(), "cityId3", cityId3.toString(), "routeId2", routeId2.toString()))
                     .consume();
 
-            session.run("CREATE (:City{id:$cityId2, name:'Ankara'})" +
+            session.run("MERGE (:City{id:$cityId2, name:'Ankara'})" +
                             "-[:ROUTES]->(:Route{id:$routeId3,from:'Ankara', destination:'Antalya', duration: 2}) " +
                             "-[:ROUTES]->(:City{id:$cityId3, name:'Antalya'})",
                     Map.of("cityId2", cityId2.toString(), "cityId3", cityId3.toString(), "routeId3", routeId3.toString()))
