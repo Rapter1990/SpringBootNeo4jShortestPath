@@ -159,18 +159,18 @@ public class AppApplicationTests {
     void addRoute() throws Exception {
         mockMvc.perform(post("/api/v1/route/" + cityId1 + "/" + cityId2 + "/create-route")
                 .contentType("application/json")
-                .content("{\"from\" : \"Istanbul\", \"destination\" : \"Ankara\", \"departureTime\" : \"9:00\", \"arriveTime\" : \"11:00\"}")
+                .content("{\"from\" : \"Istanbul\", \"destination\" : \"İzmir\", \"departureTime\" : \"9:00\", \"arriveTime\" : \"11:00\"}")
                 .accept("application/json"))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.from").value("Istanbul"))
-                .andExpect(jsonPath("$.destination").value("Ankara"));
+                .andExpect(jsonPath("$.destination").value("İzmir"));
 
         try (Session session = driver.session()) {
             List<Record> records = session.run("MATCH (c:City) return c.name as cityName").list();
             assertThat(records).hasSize(2);
             assertThat(records).map(record -> record.get("cityName").asString())
-                    .containsExactlyInAnyOrder("Ankara", "Istanbul");
+                    .containsExactlyInAnyOrder("İzmir", "Istanbul");
         }
     }
 
@@ -202,12 +202,12 @@ public class AppApplicationTests {
         try {
             mockMvc.perform(put("/api/v1/route/" + cityId1 + "/update-route/" + routeId1)
                     .contentType("application/json")
-                    .content("{\"from\" : \"Istanbul\", \"destination\" : \"Ankara\", \"departureTime\" : \"9:00\", \"arriveTime\" : \"11:30\"}")
+                    .content("{\"from\" : \"Istanbul\", \"destination\" : \"Trabzon\", \"departureTime\" : \"9:00\", \"arriveTime\" : \"11:30\"}")
                     .accept("application/json"))
                     .andDo(print())
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.from").value("Istanbul"))
-                    .andExpect(jsonPath("$.destination").value("Antalya"));
+                    .andExpect(jsonPath("$.destination").value("Trabzon"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -230,7 +230,7 @@ public class AppApplicationTests {
     void shortestPath(){
         webTestClient.method(HttpMethod.GET).uri("/api/v1/shortestpath/shortest-path")
                 .accept(MediaType.APPLICATION_JSON)
-                .bodyValue("{\"from\":\"Istanbul\", \"destination\":\"Antalya\"}")
+                .bodyValue("{\"from\":\"Istanbul\", \"destination\":\"Ankara\"}")
                 .header("content-type", "application/json")
                 .exchange()
                 .expectStatus().isOk()
