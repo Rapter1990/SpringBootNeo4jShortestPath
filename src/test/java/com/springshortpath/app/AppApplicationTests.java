@@ -83,7 +83,7 @@ public class AppApplicationTests {
                             "cityId3", cityId3.toString(),
                             "routeId1", routeId1.toString(),
                             "routeId2", routeId2.toString(),
-                            "routeId3", routeId2.toString()
+                            "routeId3", routeId3.toString()
                     )
             );
         }
