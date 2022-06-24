@@ -96,7 +96,8 @@ public class AppApplicationTests {
                     .andDo(print())
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$[0]['name']").value("Istanbul"))
-                    .andExpect(jsonPath("$[1]['name']").value("Ankara"));
+                    .andExpect(jsonPath("$[1]['name']").value("Ankara"))
+                    .andExpect(jsonPath("$[2]['name']").value("Antalya"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -115,6 +116,12 @@ public class AppApplicationTests {
                     .andDo(print())
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.name").value("Ankara"));
+
+            // ensure optional match works and returns a city without a route relationship
+            mockMvc.perform(get("/api/v1/city/id/" + cityId3).accept("application/json"))
+                    .andDo(print())
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.name").value("Antalya"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -195,7 +202,7 @@ public class AppApplicationTests {
         try {
             mockMvc.perform(put("/api/v1/route/" + cityId1 + "/update-route/" + routeId1)
                     .contentType("application/json")
-                    .content("{\"from\" : \"Istanbul\", \"destination\" : \"Antalya\", \"departureTime\" : \"9:00\", \"arriveTime\" : \"11:30\"}")
+                    .content("{\"from\" : \"Istanbul\", \"destination\" : \"Ankara\", \"departureTime\" : \"9:00\", \"arriveTime\" : \"11:30\"}")
                     .accept("application/json"))
                     .andDo(print())
                     .andExpect(status().isOk())
@@ -223,7 +230,7 @@ public class AppApplicationTests {
     void shortestPath(){
         webTestClient.method(HttpMethod.GET).uri("/api/v1/shortestpath/shortest-path")
                 .accept(MediaType.APPLICATION_JSON)
-                .bodyValue("{\"from\":\"Istanbul\", \"destination\":\"Ankara\"}")
+                .bodyValue("{\"from\":\"Istanbul\", \"destination\":\"Antalya\"}")
                 .header("content-type", "application/json")
                 .exchange()
                 .expectStatus().isOk()
