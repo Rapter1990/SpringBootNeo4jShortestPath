@@ -168,7 +168,7 @@ public class AppApplicationTests {
 
         try (Session session = driver.session()) {
             List<Record> records = session.run("MATCH (c:City) return c.name as cityName").list();
-            assertThat(records).hasSize(2);
+            assertThat(records).hasSize(3);
             assertThat(records).map(record -> record.get("cityName").asString())
                     .containsExactlyInAnyOrder("İzmir", "Istanbul");
         }
