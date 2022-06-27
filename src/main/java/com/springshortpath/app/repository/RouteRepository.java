@@ -33,6 +33,6 @@ public interface RouteRepository extends Neo4jRepository<Route,UUID> {
 
     @Query("MATCH (route:Route {id: $routeId}) " +
             "OPTIONAL MATCH (route)-[r:ROUTES]-(city:City)" +
-            "DELETE route, r, city")
+            "DELETE route, r")
     void deleteRoute(UUID cityId, UUID routeId);
 }

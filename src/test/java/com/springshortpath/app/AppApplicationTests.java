@@ -72,9 +72,9 @@ public class AppApplicationTests {
     void initializeData() {
         try (Session session = driver.session()) {
             session.run("MATCH (n) detach delete n").consume();
-            session.run("MERGE (:City1{id:$cityId1, name:'Istanbul'})" +
-                            "MERGE (:City2{id:$cityId2, name:'Ankara'})" +
-                            "MERGE (:City3{id:$cityId3, name:'Antalya'})" +
+            session.run("MERGE (City1:City{id:$cityId1, name:'Istanbul'})" +
+                            "MERGE (City2:City{id:$cityId2, name:'Ankara'})" +
+                            "MERGE (City3:City{id:$cityId3, name:'Antalya'})" +
                             "MERGE (City1)-[:ROUTES]->(:Route{id:$routeId1,from:'Istanbul', destination:'Ankara', duration: 2})-[:ROUTES]->(City2)" +
                             "MERGE (City1)-[:ROUTES]->(:Route{id:$routeId2,from:'Istanbul', destination:'Antalya', duration: 3})-[:ROUTES]->(City3)" +
                             "MERGE (City2)-[:ROUTES]->(:Route{id:$routeId3,from:'Ankara', destination:'Antalya', duration: 2})-[:ROUTES]->(City3)",
@@ -145,11 +145,11 @@ public class AppApplicationTests {
         try {
             mockMvc.perform(put("/api/v1/city/" + cityId1)
                     .contentType("application/json")
-                    .content("{\"name\" : \"Antalya\"}")
+                    .content("{\"name\" : \"İzmir\"}")
                     .accept("application/json"))
                     .andDo(print())
                     .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.name").value("Antalya"));
+                    .andExpect(jsonPath("$.name").value("İzmir"));
         } catch (Exception e) {
             e.printStackTrace();
         }
