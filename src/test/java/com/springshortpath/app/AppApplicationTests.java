@@ -170,7 +170,7 @@ public class AppApplicationTests {
             List<Record> records = session.run("MATCH (c:City) return c.name as cityName").list();
             assertThat(records).hasSize(3);
             assertThat(records).map(record -> record.get("cityName").asString())
-                    .containsExactlyInAnyOrder("İzmir", "Istanbul");
+                    .containsExactlyInAnyOrder("Istanbul", "Ankara","Antalya");
         }
     }
 
@@ -194,7 +194,7 @@ public class AppApplicationTests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0]['from']").value("Istanbul"))
-                .andExpect(jsonPath("$[0]['destination']").value("Ankara"));
+                .andExpect(jsonPath("$[0]['destination']").value("Antalya"));
     }
 
     @Test
