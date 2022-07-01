@@ -38,10 +38,10 @@
   <tr>
       <td>GET</td>
       <td>getCityById</td>
-      <td>Get City By its id</td>
+      <td>Get City By Id</td>
       <td></td>
       <td><a href="README.md#getCityById">Info</a></td>
-      <th>No Request or Params</th>
+      <th></th>
   </tr>
   <tr>
       <td>GET</td>
@@ -50,6 +50,14 @@
       <td></td>
       <td></td>
       <td><a href="README.md#getAllCities">Info</a></td>
+  </tr>
+  <tr>
+      <td>GET</td>
+      <td>getCityByName</td>
+      <td>Get City By Name</td>
+      <td></td>
+      <td><a href="README.md#getCityByName">Info</a></td>
+      <th></th>
   </tr>
 </table>
 
@@ -75,12 +83,18 @@
     http://localhost:8077/api/v1/city/id/{cityId}
 ```
 
+##### <a id="getCityByName">Get City By Name
+```
+    http://localhost:8077/api/v1/city/name/{cityName}
+```
+
 ## No Request or Params
 
 ##### <a id="getAllCities">Get All Cities
 ```
     http://localhost:8077/api/v1/city/cities
 ```
+
 
 ### Screenshots
 
