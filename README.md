@@ -3,10 +3,11 @@
 ### 📖 Information
 
 <ul style="list-style-type:disc">
-  <li></li>
+  <li>Its aims to calculate the shortest path in terms of total connection and duration between two nodes</li>
   <li>Here is the explanation of the project
       <ul>
-        <li>Item 1</li>
+        <li>Implement the process of CRUD for both City and its Route</li>
+        <li>Use Dijkstra Single-Source Shortest Path algorithm supported by Neo4j to calculate the path</li>
       </ul>
   </li>
 </ul>
@@ -19,7 +20,10 @@
 ```
     docker-compose up -d
 ```
-<b>3 )</b> 
+<b>3 )</b> Open <b>Neo4j Browser</b> in the brower
+```
+    
+```
 
 <b>4 )</b> Explore Rest APIs
 <table style="width:100%">
@@ -29,6 +33,23 @@
     <th>Description</th>
     <th>Valid Request Body</th>
     <th>Valid Request Params</th>
+    <th>No Request or Params</th>
+  </tr>
+  <tr>
+      <td>GET</td>
+      <td>getCityById</td>
+      <td>Get City By its id</td>
+      <td></td>
+      <td><a href="README.md#getCityById">Info</a></td>
+      <th>No Request or Params</th>
+  </tr>
+  <tr>
+      <td>GET</td>
+      <td>getAllCities</td>
+      <td>Get All Cities</td>
+      <td></td>
+      <td></td>
+      <td><a href="README.md#getAllCities">Info</a></td>
   </tr>
 </table>
 
@@ -39,6 +60,27 @@
 * Neo4j
 * Docker
 * Mapper
+
+## Valid Request Body
+
+##### <a id="">
+```
+
+```
+
+## Valid Request Params
+
+##### <a id="getCityById">Get City By Id
+```
+    http://localhost:8077/api/v1/city/id/{cityId}
+```
+
+## No Request or Params
+
+##### <a id="getAllCities">Get All Cities
+```
+    http://localhost:8077/api/v1/city/cities
+```
 
 ### Screenshots
 
