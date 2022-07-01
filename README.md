@@ -31,7 +31,7 @@
 <b>7 )</b> Run the project though this command `mvn spring-boot:run`
 
 
-<b>Docker<b>
+<b>Docker</b>
 
 <b>1 )</b> Install <b>Docker Desktop</b>. Here is the installation <b>link</b> : https://docs.docker.com/docker-for-windows/install/
 
@@ -109,6 +109,51 @@ Explore Rest APIs
       <td></td>
       <td></td>
   </tr>
+  <tr>
+      <td>GET</td>
+      <td>getByRouteId</td>
+      <td>Get Route By Id</td>
+      <td></td>
+      <td><a href="README.md#getByRouteId">Info</a></td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>GET</td>
+      <td>getAllRoutes</td>
+      <td>Get All Routes By City Id</td>
+      <td></td>
+      <td><a href="README.md#getAllRoutes">Info</a></td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>POST</td>
+      <td>createRoute</td>
+      <td>Create Route by City Id and Destination City Id</td>
+      <td></td>
+      <td></td>
+      <td><a href="README.md#createRoute">Info</a></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>PUT</td>
+      <td>updateRoute</td>
+      <td>Update Route by City Id and Destination City Id</td>
+      <td></td>
+      <td></td>
+      <td><a href="README.md#updateRoute">Info</a></td>
+      <td></td>
+  </tr>
+  <tr>
+      <td>DELETE</td>
+      <td>deleteRoute</td>
+      <td>Delete Route By City Id and Route City</td>
+      <td></td>
+      <td><a href="README.md#deleteRoute">Info</a></td>
+      <td></td>
+      <td></td>
+  </tr>
 </table>
 
 
@@ -130,6 +175,8 @@ Explore Rest APIs
     }
 ```
 
+
+
 ## Valid Request Params
 
 ##### <a id="getCityById">Get City By Id
@@ -147,6 +194,21 @@ Explore Rest APIs
     http://localhost:8077/api/v1/city/{cityId}
 ```
 
+##### <a id="getByRouteId">Get Route By Id
+```
+    http://localhost:8077/api/v1/route/{routeId}
+```
+
+##### <a id="getAllRoutes">Get All Routes By City Id
+```
+    http://localhost:8077/api/v1/route/{cityId}/routes
+```
+
+##### <a id="deleteRoute">Delete Route By City Id and Route City
+```
+    http://localhost:8077/api/v1/route/{cityId}/routes
+```
+
 ## Valid Request Params and Body
 
 ##### <a id="updateCity">Update City
@@ -155,6 +217,30 @@ Explore Rest APIs
 
     {
         "name" : "Ankara"
+    }
+```
+
+##### <a id="createRoute">Create Route by City Id and Destination City Id
+```
+    http://localhost:8077/api/v1/route/{cityId}/{destinationCityId}/create-route
+
+    {
+        "from" : "İstanbul",
+        "destination" : "Ankara",
+        "departureTime" : "9:00",
+        "arriveTime" : "11:30"
+    }
+```
+
+##### <a id="updateRoute">Update Route by City Id and Destination City Id
+```
+    http://localhost:8077/api/v1/route/{cityId}/update-route/{routeId}
+
+    {
+        "from" : "Ankara",
+        "destination" : "Antalya",
+        "departureTime" : "9:00",
+        "arriveTime" : "11:00"
     }
 ```
 
