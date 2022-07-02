@@ -154,6 +154,24 @@ Explore Rest APIs
       <td></td>
       <td></td>
   </tr>
+  <tr>
+       <td>GET</td>
+       <td>getShortestPath</td>
+       <td>Get Shortest Path by Total Connection</td>
+       <td><a href="README.md#getShortestPath">Info</a></td>
+       <td></td>
+       <td></td>
+       <td></td>
+  </tr>
+  <tr>
+       <td>GET</td>
+       <td>getShortestPathInTime</td>
+       <td>Get Shortest Path by Total Hours</td>
+       <td><a href="README.md#getShortestPathInTime">Info</a></td>
+       <td></td>
+       <td></td>
+       <td></td>
+  </tr>
 </table>
 
 
@@ -172,6 +190,26 @@ Explore Rest APIs
 
     {
         "name" : "İstanbul"
+    }
+```
+
+##### <a id="getShortestPath">Get Shortest Path by Total Connection
+```
+    http://localhost:8077/api/v1/shortestpath/shortest-path
+
+    {
+        "from" : "İstanbul",
+        "destination" : "Ankara"
+    }
+```
+
+##### <a id="getShortestPathInTime">Get Shortest Path by Total Hours
+```
+    http://localhost:8077/api/v1/shortestpath/shortest-path-in-time
+
+    {
+        "from" : "İstanbul",
+        "destination" : "Ankara"
     }
 ```
 
