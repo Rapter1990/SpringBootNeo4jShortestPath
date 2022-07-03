@@ -296,5 +296,7 @@ Explore Rest APIs
 <summary>Click here to show the screenshots of project</summary>
     <p> Figure 1 </p>
     <img src ="screenshots/screenshot_1.PNG">
+    <p> Figure 2 </p>
+    <img src ="screenshots/screenshot_2.PNG">
 </details>    
     
