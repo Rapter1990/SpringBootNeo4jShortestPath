@@ -16,7 +16,7 @@ public class CityMapper {
     public CityResponse mapFromCityToCityResponse(City city){
 
         CityResponse cityResponse = new CityResponse();
-        cityResponse.setId(city.getId());
+        cityResponse.setId(city.getId() != null ? city.getId() : null );
         cityResponse.setName(city.getName());
 
         List<RouteResponse> routeResponseList = new RouteMapper()

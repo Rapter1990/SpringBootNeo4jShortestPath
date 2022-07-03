@@ -19,7 +19,7 @@ public class RouteMapper {
         routeResponse.setDepartureTime(route.getDepartureTime());
         routeResponse.setDestination(route.getDestination());
         routeResponse.setDuration(route.getDuration());
-        routeResponse.setId(route.getId());
+        routeResponse.setId(route.getId() != null ? route.getId() : null);
 
         return routeResponse;
     }
