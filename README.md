@@ -47,7 +47,7 @@
 ```
 <b>4 )</b> Rebuild image app if necessary
 ```
-    docker build -t springbootneo4jshortestpath
+    docker build -t springbootneo4jshortestpath .
 ```
 
 
