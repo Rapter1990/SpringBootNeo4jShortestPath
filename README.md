@@ -1,4 +1,4 @@
-# Calculating Shortest Path through Noe4j in Spring Boot
+# Calculating Shortest Path through Neo4j in Spring Boot
 
 <img src="screenshots/springboot_neo4j.png" alt="Main Information" width="800" height="300">
 
