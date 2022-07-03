@@ -45,6 +45,11 @@
 ```
     http://localhost:7474/browser/
 ```
+<b>4 )</b> Rebuild image app if necessary
+```
+    docker build -t springbootneo4jshortestpath
+```
+
 
 Explore Rest APIs
 <table style="width:100%">
